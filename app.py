@@ -20,12 +20,13 @@ app.config.suppress_callback_exceptions = True
 
 
 # Load data from csv
-def load_data():
-    # To do: Completar la función 
-    
+def load_data(path):
+	df = pd.read_csv(path)
+	df['time'] =pd.to_datetime(df['time'])
+	df = df.set_index('time')
+	return df
 
-# Cargar datos
-data = load_data()
+data = load_data('datos_energia.csv')
 
 # Graficar serie
 def plot_series(data, initial_date, proy):
@@ -241,3 +242,5 @@ def update_output_div(date, hour, proy):
 # Run the server
 if __name__ == "__main__":
     app.run_server(debug=True)
+
+#
